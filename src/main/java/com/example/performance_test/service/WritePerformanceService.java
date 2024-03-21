@@ -29,9 +29,10 @@ public class WritePerformanceService {
     return result;
   }
 
-  @Transactional
   public void createComment(long postId, String content) {
-    Write_Post post = writePostRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("no post"));
+    Write_Post post = writePostRepository.findById(postId)
+            .orElseThrow(() -> new EntityNotFoundException("no post"));
+
     Write_Comment comment = new Write_Comment(content, post);
 
     writeCommentRepository.save(comment);

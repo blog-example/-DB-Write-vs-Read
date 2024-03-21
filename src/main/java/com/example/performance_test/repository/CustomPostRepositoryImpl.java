@@ -22,7 +22,7 @@ public class CustomPostRepositoryImpl implements CustomPostRepository {
   @Override
   public Page<PostCommentDto> findAllWrite_PostWithCommentCount(Pageable pageable) {
 
-    // post와 comment 개수
+
     List<Object[]> results = entityManager.createQuery(
                     "SELECT p.id, p.title, COUNT(c) "
                             + "FROM Write_Post p LEFT JOIN p.comments c "
@@ -59,7 +59,7 @@ public class CustomPostRepositoryImpl implements CustomPostRepository {
             .collect(Collectors.toList());
 
     Long count = entityManager.createQuery(
-                    "SELECT COUNT(DISTINCT p.id) " +
+                    "SELECT COUNT(p.id) " +
                             "FROM Read_Post p", Long.class)
             .getSingleResult();
 

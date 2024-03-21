@@ -35,7 +35,9 @@ public class ReadPerformanceService {
 
   @Transactional
   public void createComment(long postId, String content) {
-    Read_Post post = readPostRepository.findByIdWithLock(postId).orElseThrow(() -> new EntityNotFoundException("no post"));
+    Read_Post post = readPostRepository.findByIdWithLock(postId)
+            .orElseThrow(() -> new EntityNotFoundException("no post"));
+
     Read_Comment comment = new Read_Comment(content, post);
 
     post.setCommentCount(post.getCommentCount() + 1);
